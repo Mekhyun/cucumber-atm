@@ -27,7 +27,7 @@ public class Bank {
       return null;
    }
 
-   public void transfer(int givingId, int receiverId, double amount) throws NotEnoughBalanceException {
+   public void transfer(int givingId, int receiverId, double amount) throws NotEnoughBalanceException, NegativeBalanceException {
       customers.get(givingId).getAccount().withdraw(amount);
       customers.get(receiverId).getAccount().deposit(amount);
    }

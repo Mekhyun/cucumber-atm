@@ -49,6 +49,16 @@ public class StepDefATM {
         atm.withdraw(amount);
     }
 
+    @When("I deposit positive {float} to my account via ATM")
+    public void i_deposit_positive_to_my_account_via_ATM(float amount) throws NegativeBalanceException {
+        atm.deposit(amount);
+    }
+
+    @When("I deposit negative {float} to my account via ATM")
+    public void i_deposit_negative_to_my_account_via_ATM(float amount) throws NegativeBalanceException {
+        assertThrows(NegativeBalanceException.class, () -> atm.deposit(amount));
+    }
+
     @When("I overdraw {float} from ATM")
     public void i_withdraw_from_atm_more_than_balance(double amount) throws NotEnoughBalanceException {
         assertThrows(NotEnoughBalanceException.class,
@@ -60,7 +70,7 @@ public class StepDefATM {
     }
 
     @When("I transfer {float} to customer id {int}")
-    public void i_transfer_to_customer_id(double amount, int toId) throws NotEnoughBalanceException {
+    public void i_transfer_to_customer_id(double amount, int toId) throws NotEnoughBalanceException, NegativeBalanceException {
         atm.transfer(toId, amount);
     }
 

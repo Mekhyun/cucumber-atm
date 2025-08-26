@@ -23,7 +23,7 @@ public class ATM {
             currentAccount.withdraw(value);
 	}
 
-	public void deposit(double value) {
+	public void deposit(double value) throws NegativeBalanceException {
 		if (currentAccount != null)
             currentAccount.deposit(value);
 	}
@@ -34,7 +34,7 @@ public class ATM {
         return -1;
 	}
 
-	public void transfer(int receiverId, double amount) throws NotEnoughBalanceException {
+	public void transfer(int receiverId, double amount) throws NotEnoughBalanceException, NegativeBalanceException {
 		if (currentAccount != null)
             bank.transfer(currentCustomer.getId(), receiverId, amount);
 	}

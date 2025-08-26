@@ -28,7 +28,11 @@ public class ATMConsoleUI {
 				if (command.equalsIgnoreCase("A")) {
 					System.out.print("Amount: ");
 					double amount = in.nextDouble();
-					theATM.deposit(amount);
+					try	{
+						theATM.deposit(amount);
+					} catch (NegativeBalanceException e) {
+						System.out.println(e.getMessage());
+					}
 				} else if (command.equalsIgnoreCase("B")) {
 					System.out.print("Amount: ");
 					double amount = in.nextDouble();
@@ -46,8 +50,10 @@ public class ATMConsoleUI {
 						theATM.transfer(transferTo, amount);
 					} catch (NotEnoughBalanceException e) {
 						System.out.print(e.getMessage());
-					}
-				}
+					} catch (NegativeBalanceException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
 			} while (!command.equalsIgnoreCase("D"));
 		}
 	}
